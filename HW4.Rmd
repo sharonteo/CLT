@@ -1,0 +1,100 @@
+---
+title: "BootStrap Homework 4"
+author: "Sharon Teo"
+date: "May 31, 2016"
+output: 
+  html_document:
+  keep_md: true
+---
+
+## Central Limit Theorem
+The Central Limit Theorem states that if we repeatedly take independent random samples of size n from a population, the distribution of the sample means will approach a normal distribution. 
+
+The purpose of this assignment is to demonstrate the Central Limit Theorem with bootstrap code using a normal distribution and exponential distribution.
+
+## Bootstrap Code for Normal Distribution for sample size 50
+```{r}
+x <- rnorm(50)
+nsim <- 1000
+bootnorm <- numeric(nsim)
+for (i in 1:nsim){
+bootsample <-sample(x, replace=TRUE)
+bootnorm[i] <-mean(bootsample)
+}
+```
+## Mean and SD for Normal Distribution, n = 50
+```{r}
+mean(bootnorm)
+sd(bootnorm)
+```
+## Histogram of Normal Distribution for sample size 50
+```{r}
+hist(bootnorm)
+abline(v=mean(bootnorm), col="red", lwd=2)
+```
+
+## Bootstrap Code for Normal Distribution for sample size 100
+```{r}
+x <- rnorm(100)
+nsim <- 1000
+bootnorm <- numeric(nsim)
+for (i in 1:nsim){
+bootsample <-sample(x, replace=TRUE)
+bootnorm[i] <-mean(bootsample)
+}
+```
+## Mean and SD for Normal Distribution, n = 100
+```{r}
+mean(bootnorm)
+sd(bootnorm)
+```
+## Histogram of Normal Distribution for sample size 100
+```{r}
+hist(bootnorm)
+abline(v=mean(bootnorm), col="red", lwd=2)
+```
+
+## Bootstrap Code for Exponential Distribution for sample size 50
+```{r}
+y <- rexp(500, rate=1)
+nsim <- 1000
+bootexp <- numeric(nsim)
+for (i in 1:nsim){
+bootsample <-sample(y, 50, replace=TRUE)
+bootexp[i] <-mean(bootsample)
+}
+```
+## Mean and SD for Exponential Distribution, n = 50
+```{r}
+mean(bootexp)
+sd(bootexp)
+```
+## Histogram of Exponential Distribution for sample size 50
+```{r}
+hist(bootexp)
+abline(v=mean(bootexp), col="red", lwd=2)
+```
+
+## Bootstrap Code for Exponential Distribution for sample size 100
+```{r}
+y <- rexp(1000, rate=1)
+nsim <- 1000
+bootexp <- numeric(nsim)
+for (i in 1:nsim){
+bootsample <-sample(y, 100, replace=TRUE)
+bootexp[i] <-mean(bootsample)
+}
+```
+## Mean and SD for Exponential Distribution, n = 100
+```{r}
+mean(bootexp)
+sd(bootexp)
+```
+## Histogram of Exponential Distribution for sample size 100
+```{r}
+hist(bootexp)
+abline(v=mean(bootexp), col="red", lwd=2)
+```
+
+## Conclusion
+As demonstrated in the histograms, as sample size n increases, the shape of the distribution will look approximately normal, regardless of the underlying distribution. This was apparent with the bootstrap of the exponential distrubution. When the means of the bootstrap samples were plotted, the distribution was approximately normal.
